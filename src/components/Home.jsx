@@ -54,8 +54,9 @@ const Home = () => {
       city3: "Bozhou",
     },
   ];
-  const [search, Setsearch] = useState(data);
-
+  const [search, Setsearch] = useState([]);
+  const [cityName, SetcityName] = useState();
+ 
   return (
     <>
       <div className="container container1">
@@ -67,36 +68,44 @@ const Home = () => {
         <div className="row">
           <div className="col-3">
             <h5>Select Country</h5>
-            <input
+            <label> <input
               type="radio"
               name="country"
               onClick={() => Setsearch(data)}
-            />{" "}
-            <label>India</label>
+            />
+            India</label>
             <div>
-              <input
+            <label> <input
                 type="radio"
                 name="country"
                 onClick={() => Setsearch(data1)}
-              />{" "}
-              <label>China</label>
+              />
+              China</label>
             </div>
             <h5>Select State</h5>
-            <input type="radio" name="state" /> <label>Maharashtra</label>
-            <div>
-              <input type="radio" name="state" /> <label>Uttar Pradesh</label>
+            {
+              search.map((city)=>{
+            return(
+              <div>
+            <label><input type="radio" name="state" onClick={()=>SetcityName(city)}/> {city.state}</label>
             </div>
-            <div>
-              <input type="radio" name="state" /> <label>Karnataka</label>
-            </div>
+            )
+              })
+            }
+            
             <h5>Select City</h5>
-            <input type="radio" name="city" /> <label>Mumbai</label>
+           {cityName? <>
             <div>
-              <input type="radio" name="city" /> <label>Pune</label>
+            <label><input type="radio" name="city" /> {cityName.city1}</label>
             </div>
             <div>
-              <input type="radio" name="city" /> <label>Nagpur</label>
+            <label><input type="radio" name="city" /> {cityName.city2}</label>
             </div>
+            <div>
+            <label><input type="radio" name="city" /> {cityName.city3}</label>
+            </div>
+           </>:''
+           }
           </div>
           <div className="col-9 text-center">
             <h5>Country Data</h5>
